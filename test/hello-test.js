@@ -13,7 +13,6 @@ describe('Hello API interface', function () {
             .end(function (err, res) {
                 res.should.have.status(200);
                 res.body.should.be.a('object');
-                // res.body
                 done();
             });
     });
