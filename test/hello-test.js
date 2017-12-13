@@ -15,5 +15,5 @@ describe('Hello', function () {
                 // res.body
                 done();
             });
-    })
+    });
 });
