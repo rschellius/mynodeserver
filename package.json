@@ -4,7 +4,7 @@
   "description": "",
   "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "node node_modules/mocha/bin/_mocha ./test/*test.js --reporter spec --exit",
     "start": "nodemon ."
   },
   "author": "",
@@ -14,5 +14,10 @@
     "express": "^4.16.2",
     "morgan": "^1.9.0",
     "nodemon": "^1.12.5"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1"
   }
 }
