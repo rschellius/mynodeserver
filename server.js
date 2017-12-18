@@ -39,7 +39,7 @@ app.use('/api/v1', todos_v1);
 app.use('*', function (req, res, next) {
 	res.status(200)
 		.json({
-			message: 'Geen enkele endpoint matchte!'
+			message: 'Geen enkele endpoint matcht!'
 		})
 		.end();
 });
