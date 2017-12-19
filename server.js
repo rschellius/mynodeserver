@@ -9,6 +9,8 @@ var logger = require('morgan');
 var config = require('./config/config');
 var db = require('./config/db');
 
+const port = process.env.PORT || 4001
+
 var app = express();
 
 app.use(bodyParser.urlencoded({
@@ -42,7 +44,7 @@ app.use('/api/v1', todos_v1);
 // Logregel, wordt getoond wanneer geen andere routes matchten
 // EN er geen foutsituatie is - anders wordt de error handler aangeroepen  
 app.use('*', function (req, res, next) {
-	res.status(200)
+	res.status(404) //return 404 for a 404 route, not 200!
 		.json({
 			message: 'Geen enkele endpoint matcht!'
 		})
@@ -57,8 +59,8 @@ app.use(function (error, req, res, next) {
 	}).end();
 });
 
-app.listen(process.env.PORT || 4001, function () {
-	console.log('De server luistert op port 4001');
+app.listen(port, function () {
+	console.log('De server luistert op port ' + port); //log the actual active port, not some static number
 });
 
 module.exports = app;
