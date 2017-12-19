@@ -34,6 +34,24 @@ module.exports = {
         });
     },
 
+    // Deze handler laat zien hoe een error via next door de errorhandler 
+    // in server.js wordt afgehandeld. 
+    errorDemo(req, res, next) {
+        console.log('todo.controller errorDemo');
+        db.query('SELECT * FROM nonExistentTable', function (error, rows, fields) {
+            if (error) {
+                next(error);
+            } else {
+                res.status(200).json({
+                    status: {
+                        query: 'OK'
+                    },
+                    result: rows
+                }).end();
+            };
+        });
+    },
+
     create(req, res, next) {
         console.log('todo.controller create');
         res.status(200).json({
