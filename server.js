@@ -3,6 +3,7 @@ var http = require('http');
 var express = require('express');
 var routes_v1 = require('./api/routes_v1');
 var todos_v1 = require('./api/todos.api');
+var status_v1 = require('./api/status.api');
 var bodyParser = require('body-parser')
 var logger = require('morgan');
 
@@ -40,6 +41,7 @@ app.use('/api*', function (req, resp, next) {
 // Installeer de api endpoint routes die we willen aanbieden 
 app.use('/api/v1', routes_v1);
 app.use('/api/v1', todos_v1);
+app.use('/api/v1', status_v1);
 
 // Logregel, wordt getoond wanneer geen andere routes matchten
 // EN er geen foutsituatie is - anders wordt de error handler aangeroepen  
