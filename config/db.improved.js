@@ -18,6 +18,7 @@ const reconnectTimeout = 2000; // ms.
 
 var connection;
 
+// http://sudoall.com/node-js-handling-mysql-disconnects/
 function handleDisconnect() {
     connection = mysql.createConnection(connectionSettings);
 
