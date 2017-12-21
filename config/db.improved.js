@@ -25,17 +25,20 @@ function handleDisconnect() {
     connection.connect(function (error) {
         if (error) {
             console.error('Error connecting to database ' + connectionSettings.database + ' on ' + connectionSettings.host + ': ' + error.message);
+            connection.end();
             setTimeout(handleDisconnect, reconnectTimeout);
         } else {
-            console.log('Connected to database ' + connectionSettings.database + ' on ' + connectionSettings.host);
+            console.log('Connected to database ' + connectionSettings.database + ' on ' + connectionSettings.host + ', state = ' + connection.state);
         }
     });
     connection.on('error', function (error) {
         if (error.code === 'ECONNRESET') {
-            console.error('Connection reset - reconnecting');
+            console.error('Connection state = ' + connection.state + ' - reconnecting');
+            connection.end();
             handleDisconnect();
         } else {
             console.error('Connection ERROR - database ' + connectionSettings.database + ' on ' + connectionSettings.host + ': ' + error.message);
+            connection.end();
             handleDisconnect();
         }
     });

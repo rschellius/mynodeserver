@@ -3,10 +3,12 @@ var db = require('../config/db');
 module.exports = {
 
     getStatus(req, res, next) {
-        console.log('status.controller getStatus');
+
+        res.header('Cache-Control: no-cache, no-store, must-revalidate');
+
         const db_config = db.config;
         delete db_config.password;
-        const status = {
+        var status = {
             server: 'OK',
             db: {
                 status: db.state,
