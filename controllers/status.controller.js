@@ -6,7 +6,7 @@ module.exports = {
 
         res.header('Cache-Control: no-cache, no-store, must-revalidate');
 
-        const db_config = db.config;
+        var db_config = db.config;
         delete db_config.password;
         var status = {
             server: 'OK',
