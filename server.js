@@ -8,9 +8,9 @@ var bodyParser = require('body-parser')
 var logger = require('morgan');
 
 var config = require('./config/config');
-var db = require('./config/db');
+var db = require('./config/db.improved');
 
-const port = process.env.PORT || 4001
+const port = process.env.PORT || config.webPort || 4001
 
 var app = express();
 

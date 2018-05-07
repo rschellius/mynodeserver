@@ -5,10 +5,11 @@ USE `todolist`;
 
 -- todolist_user aanmaken
 CREATE USER 'todolist_user'@'%' IDENTIFIED BY 'secret';
+CREATE USER 'todolist_user'@'localhost' IDENTIFIED BY 'secret';
 
 -- geef in een keer alle rechten - soort administrator!
 GRANT ALL ON `todolist`.* TO 'todolist_user'@'%';
-
+GRANT ALL ON `todolist`.* TO 'todolist_user'@'localhost';
 
 -- -----------------------------------------------------
 -- Table `todos`
