@@ -2,7 +2,6 @@
 //
 //
 var mysql = require('mysql')
-var config = require('../config/config')
 
 const reconnectTimeout = 2000 // ms.
 

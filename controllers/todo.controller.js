@@ -1,4 +1,4 @@
-const Database = require('../config/db.improved');
+const Database = require('../model/Database');
 const config = require('../config/config')
 
 const connectionSettings = {

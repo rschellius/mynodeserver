@@ -1,4 +1,16 @@
-var db = require('../config/db.improved');
+const Database = require('../model/Database');
+const config = require('../config/config')
+
+const connectionSettings = {
+    host: process.env.DB_HOST || config.dbHost,
+    user: process.env.DB_USER || config.dbUser,
+    password: process.env.DB_PASSWORD || 'secret',
+    database: process.env.DB_DATABASE || config.dbDatabase,
+    port: 3306,
+    debug: false
+}
+
+let db = new Database(connectionSettings)
 
 module.exports = {
 
