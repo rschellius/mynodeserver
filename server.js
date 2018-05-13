@@ -8,9 +8,20 @@ var bodyParser = require('body-parser')
 var logger = require('morgan');
 
 var config = require('./config/config');
-var db = require('./config/db.improved');
+// var db = require('./config/db.improved');
 
 const port = process.env.PORT || config.webPort || 4001
+
+
+let gracefulExit = function () {
+	setTimeout(() => {
+		console.log(`Gracefully terminating all relevant connections`);
+		process.exit(0);
+	}, 1000);
+};
+
+process.on('SIGINT', gracefulExit).on('SIGTERM', gracefulExit);
+
 
 var app = express();
 

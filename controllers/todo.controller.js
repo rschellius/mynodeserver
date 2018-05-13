@@ -1,10 +1,26 @@
-var db = require('../config/db');
+const Database = require('../config/db.improved');
+const config = require('../config/config')
+
+const connectionSettings = {
+    host: process.env.DB_HOST || config.dbHost,
+    user: process.env.DB_USER || config.dbUser,
+    password: process.env.DB_PASSWORD || 'secret',
+    database: process.env.DB_DATABASE || config.dbDatabase,
+    port: 3306,
+    debug: false
+}
+
+let db = new Database(connectionSettings)
 
 module.exports = {
 
     getAll(req, res, next) {
         console.log('todo.controller getAll');
-        db.query('SELECT * FROM todos', function (error, rows, fields) {
+        db.connect()
+        db.connection.query('SELECT * FROM todos', function (error, rows, fields) {
+            db.connection.end(function (err) {
+                console.log('The connection is terminated now')
+            })
             if (error) {
                 next(error);
             } else {
@@ -15,12 +31,12 @@ module.exports = {
                     result: rows
                 }).end();
             };
-        });
+        })
     },
 
     getOneById(req, res, next) {
         const id = req.params.id;
-        db.query('SELECT * FROM todos WHERE ID=' + id, function (error, rows, fields) {
+        db.connection.query('SELECT * FROM todos WHERE ID=' + id, function (error, rows, fields) {
             if (error) {
                 next(error);
             } else {
@@ -38,7 +54,7 @@ module.exports = {
     // in server.js wordt afgehandeld. 
     errorDemo(req, res, next) {
         console.log('todo.controller errorDemo');
-        db.query('SELECT * FROM nonExistentTable', function (error, rows, fields) {
+        db.connection.query('SELECT * FROM nonExistentTable', function (error, rows, fields) {
             if (error) {
                 next(error);
             } else {
