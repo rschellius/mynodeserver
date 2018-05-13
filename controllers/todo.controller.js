@@ -36,7 +36,11 @@ module.exports = {
 
     getOneById(req, res, next) {
         const id = req.params.id;
+        db.connect()
         db.connection.query('SELECT * FROM todos WHERE ID=' + id, function (error, rows, fields) {
+            db.connection.end(function (err) {
+                console.log('The connection is terminated now')
+            })
             if (error) {
                 next(error);
             } else {
